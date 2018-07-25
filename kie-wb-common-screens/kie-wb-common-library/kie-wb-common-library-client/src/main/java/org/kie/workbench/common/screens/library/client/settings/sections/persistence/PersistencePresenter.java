@@ -274,4 +274,16 @@ public class PersistencePresenter extends Section<ProjectScreenModel> {
             super(itemPresenters);
         }
     }
+
+    @Override
+    public void openEditModal(String... vaules) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void openAddModal() {
+        // TODO Auto-generated method stub
+        
+    }
 }

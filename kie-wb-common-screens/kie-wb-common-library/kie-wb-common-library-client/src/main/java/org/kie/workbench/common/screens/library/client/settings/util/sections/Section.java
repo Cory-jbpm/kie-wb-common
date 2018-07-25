@@ -42,6 +42,10 @@ public abstract class Section<T> {
     public abstract SectionView<?> getView();
 
     public abstract int currentHashCode();
+    
+    public abstract void openEditModal(final String... vaules);
+    
+    public abstract void openAddModal();
 
     public void setDirty(final boolean dirty) {
         menuItem.markAsDirty(dirty);
