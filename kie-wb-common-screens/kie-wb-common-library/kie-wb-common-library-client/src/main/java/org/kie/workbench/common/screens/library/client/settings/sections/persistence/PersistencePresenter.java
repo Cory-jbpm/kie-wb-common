@@ -50,7 +50,7 @@ import org.uberfire.client.promise.Promises;
 import org.uberfire.workbench.events.NotificationEvent;
 
 import static org.uberfire.workbench.events.NotificationEvent.NotificationType.WARNING;
-
+import org.kie.workbench.common.screens.library.client.settings.util.sections.SectionListPresenter;
 public class PersistencePresenter extends Section<ProjectScreenModel> {
 
     private final View view;
@@ -158,7 +158,9 @@ public class PersistencePresenter extends Section<ProjectScreenModel> {
         propertiesListPresenter.setup(
                 view.getPropertiesTable(),
                 getPersistenceUnitModel().getProperties(),
-                (property, presenter) -> presenter.setup(property, this));
+                (property, presenter) -> presenter.setup(property, this),
+                null,
+                newPropertyModal);
     }
 
     private void setupPersistableDataObjectsTable() {
@@ -168,7 +170,9 @@ public class PersistencePresenter extends Section<ProjectScreenModel> {
         persistableDataObjectsListPresenter.setup(
                 view.getPersistableDataObjectsTable(),
                 getPersistenceUnitModel().getClasses(),
-                (className, presenter) -> presenter.setup(className, this));
+                (className, presenter) -> presenter.setup(className, this),
+                newPersistableDataObjectModal,
+                null);
     }
 
     @Override
@@ -258,20 +262,30 @@ public class PersistencePresenter extends Section<ProjectScreenModel> {
     }
 
     @Dependent
-    public static class PersistableDataObjectsListPresenter extends ListPresenter<String, PersistableDataObjectsItemPresenter> {
+    public static class PersistableDataObjectsListPresenter extends SectionListPresenter<String, PersistableDataObjectsItemPresenter> {
 
         @Inject
         public PersistableDataObjectsListPresenter(final ManagedInstance<PersistableDataObjectsItemPresenter> itemPresenters) {
             super(itemPresenters);
         }
+        
+        @Override
+        public String getT(String[] values) {
+            return values[0];
+        }
     }
 
     @Dependent
-    public static class PropertiesListPresenter extends ListPresenter<Property, PropertiesItemPresenter> {
+    public static class PropertiesListPresenter extends SectionListPresenter<Property, PropertiesItemPresenter> {
 
         @Inject
         public PropertiesListPresenter(final ManagedInstance<PropertiesItemPresenter> itemPresenters) {
             super(itemPresenters);
+        }
+
+        @Override
+        public Property getT(String... values) {
+            return new Property(values[0], values[1]);
         }
     }
 
