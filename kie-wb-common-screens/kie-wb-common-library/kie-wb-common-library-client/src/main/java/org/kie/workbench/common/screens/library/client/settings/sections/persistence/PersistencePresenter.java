@@ -43,7 +43,6 @@ import org.kie.workbench.common.screens.library.client.settings.util.sections.Se
 import org.kie.workbench.common.screens.library.client.settings.util.modal.doublevalue.AddDoubleValueModal;
 import org.kie.workbench.common.screens.library.client.settings.util.modal.single.AddSingleValueModal;
 import org.kie.workbench.common.screens.projecteditor.model.ProjectScreenModel;
-import org.kie.workbench.common.widgets.client.widget.ListPresenter;
 import org.uberfire.backend.vfs.ObservablePath;
 import org.uberfire.backend.vfs.PathFactory;
 import org.uberfire.client.promise.Promises;
@@ -269,10 +268,6 @@ public class PersistencePresenter extends Section<ProjectScreenModel> {
             super(itemPresenters);
         }
         
-        @Override
-        public String getT(String[] values) {
-            return values[0];
-        }
     }
 
     @Dependent
@@ -283,21 +278,6 @@ public class PersistencePresenter extends Section<ProjectScreenModel> {
             super(itemPresenters);
         }
 
-        @Override
-        public Property getT(String... values) {
-            return new Property(values[0], values[1]);
-        }
     }
 
-    @Override
-    public void openEditModal(String... vaules) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void openAddModal() {
-        // TODO Auto-generated method stub
-        
-    }
 }

@@ -21,11 +21,11 @@ import javax.inject.Inject;
 
 import org.kie.workbench.common.screens.datamodeller.model.persistence.Property;
 import org.kie.workbench.common.screens.library.client.settings.sections.persistence.PersistencePresenter;
-import org.kie.workbench.common.widgets.client.widget.ListItemPresenter;
+import org.kie.workbench.common.screens.library.client.settings.util.sections.SectionListItemPresenter;
 import org.kie.workbench.common.widgets.client.widget.ListItemView;
 
 @Dependent
-public class PropertiesItemPresenter extends ListItemPresenter<Property, PersistencePresenter, PropertiesItemPresenter.View> {
+public class PropertiesItemPresenter extends SectionListItemPresenter<Property, PersistencePresenter, PropertiesItemPresenter.View> {
 
     public interface View extends ListItemView<PropertiesItemPresenter> {
 
@@ -65,5 +65,18 @@ public class PropertiesItemPresenter extends ListItemPresenter<Property, Persist
     public void remove() {
         super.remove();
         parentPresenter.fireChangeEvent();
+    }
+    
+    public void openEditModal(String name, String value) {
+        Property itemModel = new Property();
+        itemModel.setName(property.getName());
+        itemModel.setValue(property.getValue());
+        super.remove();
+        this.getSectionListPresenter().showDoubleValueEditModal(name, value, (n,v) ->{
+            itemModel.setName(n);
+            itemModel.setValue(v);
+            this.getSectionListPresenter().add(itemModel);
+            parentPresenter.fireChangeEvent();
+        });
     }
 }

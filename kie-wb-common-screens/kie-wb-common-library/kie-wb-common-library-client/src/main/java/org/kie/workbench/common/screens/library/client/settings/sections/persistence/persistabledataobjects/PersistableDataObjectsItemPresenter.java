@@ -21,11 +21,11 @@ import javax.inject.Inject;
 
 import org.jboss.errai.ui.client.local.api.elemental2.IsElement;
 import org.kie.workbench.common.screens.library.client.settings.sections.persistence.PersistencePresenter;
-import org.kie.workbench.common.widgets.client.widget.ListItemPresenter;
+import org.kie.workbench.common.screens.library.client.settings.util.sections.SectionListItemPresenter;
 import org.kie.workbench.common.widgets.client.widget.ListItemView;
 
 @Dependent
-public class PersistableDataObjectsItemPresenter extends ListItemPresenter<String, PersistencePresenter, PersistableDataObjectsItemPresenter.View> {
+public class PersistableDataObjectsItemPresenter extends SectionListItemPresenter<String, PersistencePresenter, PersistableDataObjectsItemPresenter.View> {
 
     public interface View extends ListItemView<PersistableDataObjectsItemPresenter>,
                                   IsElement {
@@ -65,5 +65,13 @@ public class PersistableDataObjectsItemPresenter extends ListItemPresenter<Strin
 
     public View getView() {
         return view;
+    }
+    
+    public void openEditModal(String className) {
+        super.remove();
+        this.getSectionListPresenter().showSingleValueEditModal(className, v ->{
+            this.getSectionListPresenter().add(v);
+            parentPresenter.fireChangeEvent();
+        });
     }
 }

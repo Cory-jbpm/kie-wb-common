@@ -4,14 +4,14 @@ import org.kie.workbench.common.widgets.client.widget.ListItemPresenter;
 import org.kie.workbench.common.widgets.client.widget.ListItemView;
 
 
-public abstract class SectionListItemPresenter<T, ParentPresenter, V extends ListItemView<? extends ListItemPresenter<T, ParentPresenter, V>>> extends ListItemPresenter<T, ParentPresenter, V> {
+public abstract class SectionListItemPresenter<T, P, V extends ListItemView<? extends ListItemPresenter<T, P, V>>> extends ListItemPresenter<T, P, V> {
 
     public SectionListItemPresenter(V view) {
         super(view);
     }
 
-    public SectionListPresenter getSectionListPresenter() {
-        return (SectionListPresenter)this.getListPresenter();
+    public SectionListPresenter<T , ?> getSectionListPresenter() {
+        return (SectionListPresenter<T , ?>)this.getListPresenter();
     }
     
 }

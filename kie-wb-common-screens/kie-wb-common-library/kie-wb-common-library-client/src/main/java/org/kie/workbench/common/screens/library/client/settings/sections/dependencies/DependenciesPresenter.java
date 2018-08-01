@@ -147,16 +147,4 @@ public class DependenciesPresenter extends Section<ProjectScreenModel>  {
     public SectionView<?> getView() {
         return view;
     }
-
-    @Override
-    public void openEditModal(String... vaules) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void openAddModal() {
-        // TODO Auto-generated method stub
-        
-    }
 }

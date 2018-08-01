@@ -47,15 +47,20 @@ public abstract class SectionListPresenter<T, P extends ListItemPresenter<T, ?, 
         this.doubleValueModal = doubleValueModal;
     }
 
+    public void setSingleValueEditModal(final String value) {
+        if(singleValueModal != null) {
+            singleValueModal.getView().setValue(value);
+        }
+    }
     public void showSingleValueAddModal(final Consumer<String> onAdd){
         if(singleValueModal != null) {
             singleValueModal.show(onAdd);
         }
     }
     
-    public void showSingleValueEditModal(final String value, final Consumer<String> onAdd) {
-        singleValueModal.getView().setValue(value);
+    public void showSingleValueEditModal( final String value,final Consumer<String> onAdd) {
         if(singleValueModal != null) {
+            singleValueModal.getView().setValue(value);
             singleValueModal.showEditModel(onAdd);
         }
     }
@@ -66,17 +71,25 @@ public abstract class SectionListPresenter<T, P extends ListItemPresenter<T, ?, 
         }
     }
     
-    public void showDoubleValueEditModal(final String name, String value, final BiConsumer<String, String> onAdd) {
-        doubleValueModal.getView().setName(name);
-        doubleValueModal.getView().setValue(value);
+    public void setDoubleValueEditModal(final String name, String value) {
         if(doubleValueModal != null) {
+            doubleValueModal.getView().setName(name);
+            doubleValueModal.getView().setValue(value);
+        }
+    }
+    
+    public void showDoubleValueEditModal(final String name, String value, final BiConsumer<String, String> onAdd) {
+        if(doubleValueModal != null) {
+            doubleValueModal.getView().setName(name);
+            doubleValueModal.getView().setValue(value);
             doubleValueModal.showEditModal(onAdd);
         }
     }
     
-    public void addValues(String... values) {
-        super.add(getT());
-    }
-    
-    public abstract T getT(String... values);
+//    public void addValues(String... values) {
+//            super.add(getT(values));
+//        
+//    }
+//    
+//    public abstract T getT(String... values);
 }
